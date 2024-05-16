@@ -1,0 +1,72 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <section id="user">
+            {% if error %}
+            <p class="mt-4 mb-1">User with username <b class="username">{{username}}</b> not found!</p>
+
+            {% else %}
+            <div class="col col-lg-6 col-12">
+
+                <div class="mt-4 mb-2 d-flex justify-content-between align-items-center">
+                    <h4 class="username">{{ username }}</h4>
+
+                    {% if user.is_authenticated and user.username != username %}
+                        {% if not following %}
+                        <span type="button" class="badge rounded-pill bg-dark follow-btn"
+                            data-followee_username="{{ username }}"
+                            data-follower_username="{{request.user.username}}">Follow</span>
+                        {% else %}
+                        <span type="button" class="badge rounded-pill bg-dark unfollow-btn"
+                            data-followee_username="{{ username }}"
+                            data-follower_username="{{request.user.username}}">Unfollow</span>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+
+                <p class="ms-2 mb-1 user-details"><b id="black">{{num_posts}}</b> Posts <b
+                        id="black">{{num_followers}}</b> Followers
+                    <b id="black">{{num_following}}</b> Following
+                </p>
+                <hr>
+
+                {% if request.user.username == username %}
+                <button type="button" class="btn btn-outline-primary mt-1 mb-3 create-post-btn">Create Post</button>
+
+                <section class="create-post hide">
+                    <h5 class="mt-1 mb-2">Create new post </h5> <span type="button"
+                        class="badge rounded-pill text-bg-light hide1">Hide</span>
+
+                    <form action="{% url 'network:create_post'%}" method="POST" class="ms-3 mb-2 new-post">
+                        {% csrf_token %}
+                        {{ post_form }}
+                        <input class="btn btn-outline-primary" value="New Post" type="submit" name="new_post"
+                            class="ms-3 mb-2">
+                    </form>
+                </section>
+                {% endif %}
+
+                {% if user.username == username %}
+                <p><b>Your Posts:</b></p>
+                {% else %}
+                <p><b>Posts:</b></p>
+                {% endif %}
+
+                {% include "network/post.html" %}
+
+
+            {% endif %}
+        </section>
+
+        {% include "network/paginator.html" %}
+
+    </div>
+
+</div>
+
+{% endblock %}

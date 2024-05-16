@@ -1,0 +1,72 @@
+.hide1{
+    display: inline-block;
+}
+
+.create-post h5,
+#all-posts h5,
+#user h4 {
+    display: inline-block;
+}
+
+.hide1,
+#hide2  {
+    color: rgb(103, 180, 231) !important;
+}
+
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.date {
+    color: rgb(183, 183, 183);
+    font-style: italic;
+}
+
+.btn-outline-info:hover {
+    color:white;
+}
+
+.user-details {
+    color: rgb(183, 183, 183);
+    font-size: 13px;
+}
+
+#black {
+    color: black;
+}
+
+.username {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+#btn-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+  }
+
+.continue-btn:active,
+.continue-btn:focus {
+    /* Change the appearance of the button when it's active or focused */
+    outline: none;
+    box-shadow: none;
+}
+
+.likes {
+    color: rgb(183, 183, 183);
+}
+
+.heart {
+    color: #dc3545;
+}
+
+.heart-liked {
+
+}

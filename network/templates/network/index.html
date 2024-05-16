@@ -1,0 +1,54 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    {% if user.is_authenticated %}
+    <div class="row">
+
+        <div class="col col-lg-6 col-12">
+            <h4 class="mt-4"> Hello, <a href="{%  url 'network:user' username=user.username %}" class="username">{{ user.username }}</a></h4>
+
+            <button type="button" class="btn btn-outline-primary mt-4 create-post-btn">Create Post</button>
+
+            <section class="create-post">
+                <h5 class="mt-2 mb-2">Create new post </h5> <span type="button" class="badge rounded-pill text-bg-light hide1">Hide</span>
+
+                <form action="{% url 'network:create_post' %}" method="POST" class="ms-3 new-post">
+                    {% csrf_token %}
+                    {{ post_form }}
+                    <input class="btn btn-outline-primary" value="New Post" type="submit" name="new_post"  class="ms-3">
+                </form>
+
+            </section>
+        </div>
+    </div>
+    <hr>
+    {% endif %}
+    <div class="row">
+        <div class="col col-lg-6 col-12">
+
+            {% if user.is_authenticated %}
+            <button class="btn btn-outline-primary mt-4" id="all-posts-btn">All Posts</button>
+            {% endif %}
+
+            <section id="all-posts" class="mb-4">
+
+                <h5 class="mt-4 mb-2">All posts </h5>
+
+                {% if user.is_authenticated %}
+                <span type="button" class="badge rounded-pill text-bg-light" id="hide2">Hide</span>
+                {% endif %}
+
+
+                {% include "network/post.html" %}
+
+            </section>
+
+            {% include "network/paginator.html" %}
+
+    </div>
+</div>
+
+{% endblock %}
